@@ -1,7 +1,7 @@
 import React from 'react';
 import {skinCodes} from '../../constants/typeCodes';
-import * as actionTypes from '../../actions/actionTypes';
-import {setDocument , updateDocument } from '../../redux/documentReducer'
+// import * as actionTypes from '../../actions/actionTypes';
+import {setDocument , updateDocument } from '../../actions/documentActions'
 // import { bindActionCreators } from 'redux';
 
 // import { withRouter } from "react-router-dom";

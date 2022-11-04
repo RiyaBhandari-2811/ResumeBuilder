@@ -10,6 +10,9 @@ import thunk from "redux-thunk";
 import { getFirebase, ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { reduxFirestore, getFireStore } from "redux-firestore";
 import { createFirestoreInstance } from "redux-firestore";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import "firebase/compat/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -23,16 +26,25 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+firebase.firestore();
 
 const reduxStore = createStore(
   rootReducer,
-  applyMiddleware(thunk.withExtraArgument({getFirebase , getFireStore}),reduxFirestore(firebase))
+   (applyMiddleware(thunk.withExtraArgument({ getFirebase, getFireStore })),
+  reduxFirestore(firebase))
 );
 
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={reduxStore}>
-      <App />
+      <ReactReduxFirebaseProvider
+        firebase={firebase}
+        config={firebaseConfig}
+        dispatch={reduxStore.dispatch}
+        createFirestoreInstance={createFirestoreInstance}
+      >
+        <App />
+      </ReactReduxFirebaseProvider>
     </Provider>
   </BrowserRouter>,
   document.getElementById("root")

@@ -9,8 +9,8 @@ const rootReducer = combineReducers({
   document: documentReducer,
   contact: contactReducer,
   education: educationReducer,
-  firebase: firebaseReducer,
-  firestore: firestoreReducer,
+  firebase: firebaseReducer, // this we are getting from firebase . this is for auth
+  firestore: firestoreReducer, // user object dega i.e user info
 });
 
 export default rootReducer;
